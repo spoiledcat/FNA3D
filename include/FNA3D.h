@@ -1540,6 +1540,10 @@ FNA3DAPI void FNA3D_SetStringMarker(FNA3D_Device *device, const char *text);
  */
 FNA3DAPI void FNA3D_SetTextureName(FNA3D_Device *device, FNA3D_Texture *texture, const char *text);
 
+void FNA3D_Default_LogInfo(const char* msg);
+void FNA3D_Default_LogWarn(const char* msg);
+void FNA3D_Default_LogError(const char* msg);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
