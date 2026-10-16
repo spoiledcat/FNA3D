@@ -736,6 +736,13 @@ struct FNA3D_Device
 		FNA3D_SysTextureEXT *externalTextureInfo
 	);
 
+	void (*SuspendGPU)(
+		FNA3D_Renderer* driverData
+	);
+	void (*ResumeGPU)(
+		FNA3D_Renderer* driverData
+	);
+
 	/* Opaque pointer for the Driver */
 	FNA3D_Renderer *driverData;
 };
@@ -817,7 +824,10 @@ struct FNA3D_Device
 	ASSIGN_DRIVER_FUNC(SetStringMarker, name) \
 	ASSIGN_DRIVER_FUNC(SetTextureName, name) \
 	ASSIGN_DRIVER_FUNC(GetSysRenderer, name) \
-	ASSIGN_DRIVER_FUNC(CreateSysTexture, name)
+	ASSIGN_DRIVER_FUNC(CreateSysTexture, name) \
+	ASSIGN_DRIVER_FUNC(SuspendGPU, name) \
+	ASSIGN_DRIVER_FUNC(ResumeGPU, name)
+
 
 typedef struct FNA3D_Driver
 {

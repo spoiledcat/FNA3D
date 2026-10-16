@@ -5185,6 +5185,15 @@ static FNA3D_Texture* D3D11_CreateSysTexture(
 	return (FNA3D_Texture*) result;
 }
 
+static void D3D11_SuspendGPU(
+	FNA3D_Renderer* driverData
+){}
+
+static void D3D11_ResumeGPU(
+	FNA3D_Renderer* driverData
+){}
+
+
 /* Driver */
 
 static uint8_t D3D11_PrepareWindowAttributes(uint32_t *flags)

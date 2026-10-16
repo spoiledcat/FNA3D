@@ -147,6 +147,14 @@ FNA3DAPI FNA3D_Texture* FNA3D_CreateSysTextureEXT(
 	FNA3D_SysTextureEXT *systexture
 );
 
+FNA3DAPI void FNA3D_SuspendGPU(
+	FNA3D_Device* device
+);
+
+FNA3DAPI void FNA3D_ResumeGPU(
+	FNA3D_Device* device
+);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

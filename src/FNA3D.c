@@ -1569,4 +1569,25 @@ FNA3D_Texture* FNA3D_CreateSysTextureEXT(
 	);
 }
 
+void FNA3D_SuspendGPU(
+	FNA3D_Device* device
+) {
+	if (device == NULL)
+	{
+		return;
+	}
+
+	device->SuspendGPU(device->driverData);
+}
+
+void FNA3D_ResumeGPU(
+	FNA3D_Device* device
+) {
+	if (device == NULL)
+	{
+		return;
+	}
+
+	device->ResumeGPU(device->driverData);
+}
 /* vim: set noexpandtab shiftwidth=8 tabstop=8: */

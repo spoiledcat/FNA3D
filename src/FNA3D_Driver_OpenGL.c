@@ -5899,6 +5899,16 @@ static uint8_t OPENGL_PrepareWindowAttributes(uint32_t *flags)
 	return 1;
 }
 
+static void OPENGL_SuspendGPU(
+	FNA3D_Renderer* driverData
+) {
+}
+
+static void OPENGL_ResumeGPU(
+	FNA3D_Renderer* driverData
+) {
+}
+
 FNA3D_Device* OPENGL_CreateDevice(
 	FNA3D_PresentationParameters *presentationParameters,
 	uint8_t debugMode

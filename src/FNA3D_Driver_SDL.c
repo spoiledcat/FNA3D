@@ -1231,15 +1231,27 @@ static bool SDLCALL SDLGPU_INTERNAL_GDKEventFilter(void* userdata, SDL_Event* ev
 	SDLGPU_Renderer *renderer = (SDLGPU_Renderer*) userdata;
 	if (event->type == SDL_EVENT_DID_ENTER_BACKGROUND)
 	{
-		SDL_LockMutex(renderer->commandLock);
-		SDL_GDKSuspendGPU(renderer->device);
-		SDL_UnlockMutex(renderer->commandLock);
+		SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "[GDK] in SDLGPU_INTERNAL_GDKEventFilter handler: SDL_EVENT_DID_ENTER_BACKGROUND");
+		//SDL_LockMutex(renderer->commandLock);
+		//SDL_GDKSuspendGPU(renderer->device);
+		//SDL_UnlockMutex(renderer->commandLock);
+
+		SDL_Event evt;
+		evt.type = SDL_EVENT_USER;
+		evt.user.code = 7331;
+		SDL_PushEvent(&evt);
 	}
 	else if (event->type == SDL_EVENT_WILL_ENTER_FOREGROUND)
 	{
-		SDL_LockMutex(renderer->commandLock);
-		SDL_GDKResumeGPU(renderer->device);
-		SDL_UnlockMutex(renderer->commandLock);
+		SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "[GDK] in SDLGPU_INTERNAL_GDKEventFilter handler: SDL_EVENT_WILL_ENTER_FOREGROUND");
+		//SDL_LockMutex(renderer->commandLock);
+		//SDL_GDKResumeGPU(renderer->device);
+		//SDL_UnlockMutex(renderer->commandLock);
+
+		SDL_Event evt;
+		evt.type = SDL_EVENT_USER;
+		evt.user.code = 1337;
+		SDL_PushEvent(&evt);
 	}
 	return true;
 }
@@ -4312,6 +4324,26 @@ static uint8_t SDLGPU_PrepareWindowAttributes(uint32_t *flags)
 		FNA3D_LogWarn("SDL_GPUSupportsProperties failed: %s", SDL_GetError());
 	}
 	return result;
+}
+
+static void SDLGPU_SuspendGPU(
+	FNA3D_Renderer* driverData
+)
+{
+#if SDL_PLATFORM_GDK
+	SDLGPU_Renderer* renderer = (SDLGPU_Renderer*)driverData;
+	SDL_GDKSuspendGPU(renderer->device);
+#endif
+}
+
+static void SDLGPU_ResumeGPU(
+	FNA3D_Renderer* driverData
+)
+{
+#if SDL_PLATFORM_GDK
+	SDLGPU_Renderer* renderer = (SDLGPU_Renderer*)driverData;
+	SDL_GDKResumeGPU(renderer->device);
+#endif
 }
 
 static FNA3D_Device* SDLGPU_CreateDevice(
